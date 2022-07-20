@@ -1,0 +1,11 @@
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">Comidas del mundo 🍙🥖🍖🍔</a>
+    <form class="d-flex" role="search">
+      <input class="form-control" list="datalistOptions" id="exampleDataList" (change)="seleccionarPais($event)" placeholder="Selecciona un pais...">
+      <datalist id="datalistOptions" >
+        <option  *ngFor="let pais of listaPaises" [value]="pais.name">
+      </datalist>
+    </form>
+  </div>
+</nav>
