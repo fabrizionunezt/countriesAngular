@@ -5,8 +5,7 @@
         <div class="col">
           <div class="d-flex m-2 ">
             <h2 class="m-1">{{this.paisElegido.name}}</h2>
-            <img width="50px" [src]="this.paisElegido.image"
-              alt="imagen">
+            <img width="50px" [src]="this.paisElegido.image" alt="imagen">
           </div>
           <div *ngIf="this.paisComida.dish != ''" class="alert alert-primary" role="alert">
             El plato más comun en {{this.paisElegido.name}} es el "{{this.paisComida.dish}}"
@@ -14,12 +13,17 @@
           <div *ngIf="this.paisComida.dish == ''" class="alert alert-danger" role="alert">
             No se encontro la informacion del plato de {{this.paisElegido.name}}
           </div>
+          <div *ngIf="imagenesComida.length > 0" class="w-50 h-50">
+            <img [src]="imagenesComida[0].largeImageURL" class="d-block w-100" [alt]="imagenesComida[0].tags">
+          </div>
+
           <div *ngIf="this.mostrarMensaje" class="alert alert-success" role="alert">
             Presionaste el boton de Wikipedia, dirigite a la pestaña que se abrio para continuar leyendo sobre Argentina
           </div>
         </div>
         <div class="col">
-          <app-input-redirect-wiki [paisElegido]="this.paisElegido" (botonClickeado)="this.mostrarMensajeWikipedia($event)"></app-input-redirect-wiki>
+          <app-input-redirect-wiki [paisElegido]="this.paisElegido"
+            (botonClickeado)="this.mostrarMensajeWikipedia($event)"></app-input-redirect-wiki>
         </div>
       </div>
     </div>
