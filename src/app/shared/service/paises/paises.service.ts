@@ -27,13 +27,11 @@ export class PaisesService {
   }
 
   obtenerImagenesComida(comida: string, pais: string) {
-    let secureComida = comida.split(' ').join('');
+    let secureComida = comida.split(' ').join('+');
     secureComida = secureComida.split(',')[0];
-    let securePais = pais.split(' ').length > 1 ? '' : pais;
+    //let securePais = pais.split(' ').length > 1 ? '' : pais;
     return this.cliente.get<ImagenesComida>(
-      `https://pixabay.com/api/?key=28768747-682b48a12e4746f0394313291&q=food+${secureComida}${
-        securePais != '' ? '+' + securePais : ''
-      }&image_type=photo&pretty=true&per_page=5`
+      `https://pixabay.com/api/?key=28768747-682b48a12e4746f0394313291&q=food+${secureComida}&image_type=photo&pretty=true&per_page=5`
     );
   }
 }
