@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ComidaPaises } from 'src/app/shared/service/paises/models/comidaPaises';
-import { ImageDetail, ImagenesComida } from 'src/app/shared/service/paises/models/imagenesComida';
+import {
+  ImageDetail,
+  ImagenesComida,
+} from 'src/app/shared/service/paises/models/imagenesComida';
 import { Paises } from 'src/app/shared/service/paises/models/paises';
 import { PaisesService } from 'src/app/shared/service/paises/paises.service';
 import { SharedService } from 'src/app/shared/service/shared/shared.service';
@@ -26,6 +29,7 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.subscripcionPaisSeleccionado =
       this.sharedService.paisSeleccionado.subscribe((x) => {
         this.imagenesComida = [];
+        this.paisComida = { country: '', dish: '' };
         this.paisElegido = x;
         this.obtenerComidaPais(x.name);
       });
@@ -47,16 +51,19 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.paisesService.obtenerComidaPaises(nombrePais).subscribe((x) => {
       if (x) {
         this.paisComida = x;
-        if(x.dish != ''){
-          this.obtenerImagenesComida(x.dish.toLocaleLowerCase(),x.country.toLocaleLowerCase());
+        if (x.dish != '') {
+          this.obtenerImagenesComida(
+            x.dish.toLocaleLowerCase(),
+            x.country.toLocaleLowerCase()
+          );
         }
       }
     });
   }
 
-  obtenerImagenesComida(comida: string, pais: string){
-    this.paisesService.obtenerImagenesComida(comida,pais).subscribe(x =>{
-      if(x){
+  obtenerImagenesComida(comida: string, pais: string) {
+    this.paisesService.obtenerImagenesComida(comida, pais).subscribe((x) => {
+      if (x) {
         this.imagenesComida = x.hits;
       }
     });
