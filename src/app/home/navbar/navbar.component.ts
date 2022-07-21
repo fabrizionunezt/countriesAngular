@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Paises } from 'src/app/shared/service/paises/models/paises';
 import { PaisesService } from 'src/app/shared/service/paises/paises.service';
+import { SharedService } from 'src/app/shared/service/shared/shared.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ import { PaisesService } from 'src/app/shared/service/paises/paises.service';
 })
 export class NavbarComponent implements OnInit {
   listaPaises: Paises[] = [];
-  constructor(private paisesService: PaisesService) {
+  constructor(private paisesService: PaisesService, private sharedService: SharedService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +35,9 @@ export class NavbarComponent implements OnInit {
   }
 
   seleccionarPais(pais: any){
-    console.log(pais.target.value)
+    let paisSeleccionado = this.listaPaises.find(x => x.name.toLowerCase() == pais.target.value.toLowerCase());
+    if(paisSeleccionado){
+      this.sharedService.actualizarPaisSeleccionado(paisSeleccionado);
+    }
   }
 }

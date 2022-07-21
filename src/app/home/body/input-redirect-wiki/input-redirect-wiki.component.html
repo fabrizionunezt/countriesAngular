@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col">
-    <img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AR.svg" alt="imagen">
+    <img [src]="this.paisElegido.image" alt="imagen">
   </div>
   <div class="col m-auto">
-    <p>Para conocer mas informacion sobre Argentina presiona el boton de abajo</p>
-    <a href="https://es.wikipedia.org/wiki/Argentina" target="_blank" class="btn btn-primary">Wikipedia</a>
+    <p>Para conocer mas informacion sobre {{this.paisElegido.name}} presiona el boton de abajo</p>
+    <a [href]="'https://es.wikipedia.org/wiki/'+this.paisElegido.name" target="_blank" class="btn btn-primary" (click)="openWikipedia()">Wikipedia</a>
   </div>
 </div>
